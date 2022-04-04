@@ -1,0 +1,53 @@
+.container {
+  text-align: center;
+  margin: 20px auto;
+  max-width: 90%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.container .row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 12vh;
+}
+@media screen and (min-width: 800px) {
+  .container {
+    max-width: 280px;
+  }
+  .container .row {
+    grid-auto-rows: 6vh;
+  }
+}
+.zero {
+  grid-area: zero;
+}
+.equals {
+  grid-area: equals;
+}
+.row5 {
+  grid-template-areas: "zero zero . equals";
+}
+.display {
+  height: 15vh;
+  background-color: #4d4d4d;
+}
+.btn,
+.blank {
+  background-color: #737373;
+  color: white;
+  font-size: 1.2rem;
+  padding: 0;
+  border: none;
+  border-top: 1px solid #4d4d4d;
+  border-left: 1px solid #4d4d4d;
+}
+.btn {
+  cursor: pointer;
+}
+.row1 .blank:last-of-type {
+  border-left: none;
+}
+.operator {
+  background-color: orange;
+  font-size: 1.5rem;
+}
