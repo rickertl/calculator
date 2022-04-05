@@ -19,3 +19,11 @@ const divide = function (a, b) {
 const operate = function (operator, a, b) {
   return operator(a, b);
 };
+
+const buttons = document.querySelectorAll(".btn");
+buttons.forEach((button) => {
+  // and for each one we add a 'click' listener
+  button.addEventListener("click", () => {
+    console.log(button.value);
+  });
+});
