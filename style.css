@@ -10,13 +10,9 @@
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: 12vh;
 }
-@media screen and (min-width: 800px) {
-  .container {
-    max-width: 280px;
-  }
-  .container .row {
-    grid-auto-rows: 6vh;
-  }
+.display {
+  height: 15vh;
+  background-color: #4d4d4d;
 }
 .zero {
   grid-area: zero;
@@ -26,10 +22,6 @@
 }
 .row5 {
   grid-template-areas: "zero zero . equals";
-}
-.display {
-  height: 15vh;
-  background-color: #4d4d4d;
 }
 .btn,
 .blank {
@@ -50,4 +42,15 @@
 .operator {
   background-color: orange;
   font-size: 1.5rem;
+}
+@media screen and (min-width: 769px) {
+  .container {
+    max-width: 280px;
+  }
+  .container .row {
+    grid-auto-rows: 60px;
+  }
+  .display {
+    height: 80px;
+  }
 }
