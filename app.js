@@ -67,6 +67,10 @@ buttons.forEach((button) => {
     ) {
       operator = button.value;
     } else if (button.classList.contains("equals")) {
+      // check if pressing equal before all inputs collected
+      if (secondInput.length === 0) {
+        return clear();
+      }
       result.textContent = operate(
         String(operator),
         firstInput.join(""),
