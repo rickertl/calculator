@@ -42,7 +42,7 @@ let result = document.querySelector(".result");
 
 // clear calculator
 const clear = function () {
-  result.textContent = "";
+  result.textContent = "0";
   firstInput = [];
   secondInput = [];
   operator = "";
@@ -65,6 +65,10 @@ buttons.forEach((button) => {
       button.classList.contains("operator") &&
       !button.classList.contains("equals")
     ) {
+      // check if pressing operator before first inputs collected
+      if (firstInput.length === 0) {
+        return clear();
+      }
       operator = button.value;
     } else if (button.classList.contains("equals")) {
       // check if pressing equal before all inputs collected
