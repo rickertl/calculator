@@ -1,21 +1,21 @@
 // basic math operators functions
 const add = function (a, b) {
-  return a + b;
+  return Number(a) + Number(b);
 };
 
 const subtract = function (a, b) {
-  return a - b;
+  return Number(a) - Number(b);
 };
 
 const multiply = function (a, b) {
-  return a * b;
+  return Number(a) * Number(b);
 };
 
 const divide = function (a, b) {
-  if (b == 0) {
+  if (Number(b) === 0) {
     return (result.textContent = `Can't divide by zero!!!`);
   } else {
-    let answer = a / b;
+    let answer = Number(a) / Number(b);
     return answer.toFixed(2);
   }
 };
