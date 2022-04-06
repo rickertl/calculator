@@ -12,8 +12,12 @@ const multiply = function (a, b) {
 };
 
 const divide = function (a, b) {
-  let answer = a / b;
-  return answer.toFixed(2);
+  if (b == 0) {
+    return (result.textContent = `Can't divide by zero!!!`);
+  } else {
+    let answer = a / b;
+    return answer.toFixed(2);
+  }
 };
 
 // main operate function
