@@ -39,19 +39,25 @@
 .row1 .blank {
   background-color: #5a5a5a;
 }
+.row1 {
+  grid-template-areas: "clear clear . divide";
+}
+.clear {
+  grid-area: clear;
+}
 .row5 {
   grid-template-areas: "zero zero . equals";
-}
-.operator.btn,
-.equals {
-  background-color: orange;
-  font-size: 2rem;
 }
 .zero {
   grid-area: zero;
 }
 .equals {
   grid-area: equals;
+}
+.operator.btn,
+.equals {
+  background-color: orange;
+  font-size: 2rem;
 }
 @media screen and (min-width: 769px) {
   .container {
