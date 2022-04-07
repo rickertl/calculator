@@ -13,85 +13,150 @@ const multiply = function (a, b) {
 
 const divide = function (a, b) {
   if (Number(b) === 0) {
-    return (result.textContent = `Can't divide by zero!!!`);
+    return (result.textContent = `Can't divide by 0!!!`);
   } else {
-    let answer = Number(a) / Number(b);
-    return answer.toFixed(2);
-  }
-};
-
-// main operate function
-const operate = function (operator, a, b) {
-  switch (operator) {
-    case "add":
-      return add(a, b);
-    case "subtract":
-      return subtract(a, b);
-    case "multiply":
-      return multiply(a, b);
-    case "divide":
-      return divide(a, b);
+    return Number(a) / Number(b);
   }
 };
 
 // declare variables
 let firstInput = [];
 let secondInput = [];
+let firstNumber = "";
+let secondNumber = "";
 let operator = "";
+let answer = "";
 let result = document.querySelector(".result");
+
+// main operate function
+const operate = function (operator, a, b) {
+  switch (operator) {
+    case "add":
+      return (answer = add(a, b));
+    case "subtract":
+      return (answer = subtract(a, b));
+    case "multiply":
+      return (answer = multiply(a, b));
+    case "divide":
+      return (answer = divide(a, b));
+  }
+};
+
+// disable operator button. prevent consecutive operator button clicks.
+const disableOperator = function () {
+  document.querySelectorAll(".operator").forEach((button) => {
+    button.disabled = true;
+  });
+};
+
+// enable operator button
+const enableOperator = function () {
+  document.querySelectorAll(".operator").forEach((button) => {
+    button.disabled = false;
+  });
+};
+
+// disable decimal button. prevent consecutive decimal button clicks.
+const disableDecimal = function () {
+  document.querySelector(".decimal").disabled = true;
+};
+
+// enable decimal button
+const enableDecimal = function () {
+  document.querySelector(".decimal").disabled = false;
+};
+
+// display answer and ready for more inputs
+const displayAnswer = function () {
+  operate(String(operator), firstNumber, secondNumber);
+  if (typeof answer === "string") {
+    result.textContent = answer;
+  } else {
+    result.textContent = Math.round(answer * 100) / 100;
+  }
+  firstNumber = answer;
+  firstInput = [];
+  secondInput = [];
+  operator = "";
+  answer = "";
+  enableOperator();
+  enableDecimal();
+};
 
 // clear calculator
 const clear = function () {
   result.textContent = "0";
   firstInput = [];
   secondInput = [];
+  firstNumber = "";
+  secondNumber = "";
   operator = "";
+  answer = "";
+  enableDecimal();
 };
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener("click", () => {
   clear();
 });
 
-// listen for number button clicks
+// listen for "number" button clicks
 const numberButtons = document.querySelectorAll(".number");
 numberButtons.forEach((button) => {
   // and for each one we add a 'click' listener
   button.addEventListener("click", () => {
     if (!operator) {
       firstInput.push(button.value);
-      result.textContent = firstInput.join("");
-    } else if (operator) {
+      if (firstInput.includes(".")) {
+        disableDecimal();
+      }
+      firstNumber = firstInput.join("");
+      result.textContent = firstNumber;
+      enableOperator();
+    } else if (operator && !answer) {
       secondInput.push(button.value);
-      result.textContent = secondInput.join("");
+      if (secondInput.includes(".")) {
+        disableDecimal();
+      }
+      secondNumber = secondInput.join("");
+      result.textContent = secondNumber;
+      enableOperator();
     } else {
       result.textContent = "Number button error.";
     }
   });
 });
 
-// listen for operator clicks
+// listen for "operator" button clicks
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
   // and for each one we add a 'click' listener
   button.addEventListener("click", () => {
-    if (!button.classList.contains("equals")) {
-      // check if pressing operator before first inputs collected
-      if (firstInput.length === 0) {
-        return clear();
-      }
+    // check if pressing operator before first inputs collected
+    if (firstInput.length === 0 && !firstNumber) {
+      return clear();
+    } else if (operator) {
+      displayAnswer();
       operator = button.value;
-    } else if (button.classList.contains("equals")) {
-      // check if pressing equal before all inputs collected
-      if (secondInput.length === 0) {
-        return clear();
-      }
-      result.textContent = operate(
-        String(operator),
-        firstInput.join(""),
-        secondInput.join("")
-      );
+      disableOperator();
     } else {
-      result.textContent = "Operator button error.";
+      operator = button.value;
+      disableOperator();
     }
+    enableDecimal();
   });
 });
+
+// listen for "equals" button click
+const equalsButton = document.querySelector(".equals");
+equalsButton.addEventListener("click", () => {
+  // check if pressing equal before all inputs collected
+  if (secondInput.length === 0) {
+    clear();
+  } else {
+    displayAnswer();
+  }
+});
+
+/** BUGS OR TO-DO
+ * - add backspace key
+ * */

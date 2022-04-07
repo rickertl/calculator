@@ -19,7 +19,7 @@
   align-items: center;
   justify-content: right;
   padding-right: 20px;
-  font-size: 3rem;
+  font-size: 2.25rem;
 }
 .btn,
 .blank {
@@ -34,14 +34,14 @@
 .btn {
   cursor: pointer;
 }
+.row1 .btn,
+.row1 .blank {
+  background-color: #5a5a5a;
+}
 .row5 {
   grid-template-areas: "zero zero . equals";
 }
-
-.row1 .blank:last-of-type {
-  border-left: none;
-}
-.operator,
+.operator.btn,
 .equals {
   background-color: orange;
   font-size: 2rem;
