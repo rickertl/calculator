@@ -175,5 +175,5 @@ equalsButton.addEventListener("click", () => {
 });
 
 /** BUGS OR TO-DO
- * - add backspace key
+ * -
  * */
