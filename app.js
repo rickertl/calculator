@@ -47,24 +47,34 @@ const clear = function () {
   secondInput = [];
   operator = "";
 };
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener("click", () => {
+  clear();
+});
 
-// listen for button clicks
-const buttons = document.querySelectorAll(".btn");
-buttons.forEach((button) => {
+// listen for number button clicks
+const numberButtons = document.querySelectorAll(".number");
+numberButtons.forEach((button) => {
   // and for each one we add a 'click' listener
   button.addEventListener("click", () => {
-    if (button.value === "clear") {
-      clear();
-    } else if (!operator && !button.classList.contains("operator")) {
+    if (!operator) {
       firstInput.push(button.value);
       result.textContent = firstInput.join("");
-    } else if (operator && !button.classList.contains("operator")) {
+    } else if (operator) {
       secondInput.push(button.value);
       result.textContent = secondInput.join("");
-    } else if (
-      button.classList.contains("operator") &&
-      !button.classList.contains("equals")
-    ) {
+    } else {
+      result.textContent = "Number button error.";
+    }
+  });
+});
+
+// listen for operator clicks
+const operatorButtons = document.querySelectorAll(".operator");
+operatorButtons.forEach((button) => {
+  // and for each one we add a 'click' listener
+  button.addEventListener("click", () => {
+    if (!button.classList.contains("equals")) {
       // check if pressing operator before first inputs collected
       if (firstInput.length === 0) {
         return clear();
@@ -80,6 +90,8 @@ buttons.forEach((button) => {
         firstInput.join(""),
         secondInput.join("")
       );
+    } else {
+      result.textContent = "Operator button error.";
     }
   });
 });
