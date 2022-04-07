@@ -65,8 +65,7 @@
 }
 
 /* iOS button issue */
-
-input[type="button"] {
+button {
   -webkit-appearance: none;
   border-radius: 0;
 }
