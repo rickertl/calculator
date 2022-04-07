@@ -83,6 +83,23 @@ const displayAnswer = function () {
   enableDecimal();
 };
 
+// backspace button
+const backspace = function () {
+  if (secondInput.length === 0) {
+    firstInput.pop();
+    firstNumber = firstInput.join("");
+    result.textContent = firstNumber;
+  } else {
+    secondInput.pop();
+    secondNumber = secondInput.join("");
+    result.textContent = secondNumber;
+  }
+};
+const backspaceButton = document.querySelector(".backspace");
+backspaceButton.addEventListener("click", () => {
+  backspace();
+});
+
 // clear calculator
 const clear = function () {
   result.textContent = "0";
