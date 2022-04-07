@@ -63,3 +63,10 @@
     height: 80px;
   }
 }
+
+/* iOS button issue */
+
+input[type="button"] {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
