@@ -27,11 +27,9 @@ const multiply = function (a, b) {
 };
 
 const divide = function (a, b) {
-  if (Number(b) === 0) {
-    return (result.textContent = `Can't divide by 0!!!`);
-  } else {
-    return Number(a) / Number(b);
-  }
+  return Number(b) !== 0
+    ? Number(a) / Number(b)
+    : (result.textContent = `Can't divide by 0!!!`);
 };
 
 // main operate function
@@ -75,11 +73,9 @@ const enableDecimal = function () {
 // display answer and ready for more inputs
 const displayAnswer = function () {
   operate(String(operator), firstNumber, secondNumber);
-  if (typeof answer === "string") {
-    result.textContent = answer;
-  } else {
-    result.textContent = Math.round(answer * 100) / 100;
-  }
+  typeof answer === "string"
+    ? (result.textContent = answer)
+    : (result.textContent = Math.round(answer * 100) / 100);
   firstNumber = answer;
   firstInput = [];
   secondInput = [];
@@ -155,12 +151,7 @@ const captureOperator = function (button) {
 
 // equals button. display answer.
 const equals = function () {
-  // check if pressing equal before all inputs collected
-  if (secondInput.length === 0) {
-    clear();
-  } else {
-    displayAnswer();
-  }
+  secondInput.length === 0 ? clear() : displayAnswer();
 };
 
 // LISTEN FOR EVENTS //
