@@ -96,9 +96,7 @@ const backspace = function () {
   }
 };
 const backspaceButton = document.querySelector(".backspace");
-backspaceButton.addEventListener("click", () => {
-  backspace();
-});
+backspaceButton.addEventListener("click", backspace, false);
 
 // clear calculator
 const clear = function () {
@@ -112,9 +110,7 @@ const clear = function () {
   enableDecimal();
 };
 const clearButton = document.querySelector(".clear");
-clearButton.addEventListener("click", () => {
-  clear();
-});
+clearButton.addEventListener("click", clear, false);
 
 // listen for "number" button clicks
 const numberButtons = document.querySelectorAll(".number");
@@ -175,5 +171,5 @@ equalsButton.addEventListener("click", () => {
 });
 
 /** BUGS OR TO-DO
- * -
+ * - zero issue: 3 - 3 + 3 = is showing zero???
  * */
