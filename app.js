@@ -145,7 +145,8 @@ operatorButtons.forEach((button) => {
   // and for each one we add a 'click' listener
   button.addEventListener("click", () => {
     // check if pressing operator before first inputs collected
-    if (firstInput.length === 0 && !firstNumber) {
+    if (firstInput.length === 0 && firstNumber === null) {
+      // use "=== null" instead of !firstNumber bc 1st # could be zero
       return clear();
     } else if (operator) {
       displayAnswer();
@@ -171,5 +172,5 @@ equalsButton.addEventListener("click", () => {
 });
 
 /** BUGS OR TO-DO
- * - zero issue: 3 - 3 + 3 = is showing zero???
+ * -
  * */
