@@ -1,4 +1,19 @@
-// basic math operators functions
+// VARIABLE DECLARATIONS //
+let firstInput = [];
+let secondInput = [];
+let firstNumber = "";
+let secondNumber = "";
+let operator = "";
+let answer = "";
+let result = document.querySelector(".result");
+const clearButton = document.querySelector(".clear");
+const backspaceButton = document.querySelector(".backspace");
+const numberButtons = document.querySelectorAll(".number");
+const operatorButtons = document.querySelectorAll(".operator");
+const equalsButton = document.querySelector(".equals");
+
+// FUNCTIONS //
+// basic math operators
 const add = function (a, b) {
   return Number(a) + Number(b);
 };
@@ -18,15 +33,6 @@ const divide = function (a, b) {
     return Number(a) / Number(b);
   }
 };
-
-// declare variables
-let firstInput = [];
-let secondInput = [];
-let firstNumber = "";
-let secondNumber = "";
-let operator = "";
-let answer = "";
-let result = document.querySelector(".result");
 
 // main operate function
 const operate = function (operator, a, b) {
@@ -83,6 +89,18 @@ const displayAnswer = function () {
   enableDecimal();
 };
 
+// clear calculator
+const clear = function () {
+  result.textContent = "0";
+  firstInput = [];
+  secondInput = [];
+  firstNumber = "";
+  secondNumber = "";
+  operator = "";
+  answer = "";
+  enableDecimal();
+};
+
 // backspace button
 const backspace = function () {
   if (secondInput.length === 0) {
@@ -95,81 +113,77 @@ const backspace = function () {
     result.textContent = secondNumber;
   }
 };
-const backspaceButton = document.querySelector(".backspace");
-backspaceButton.addEventListener("click", backspace, false);
 
-// clear calculator
-const clear = function () {
-  result.textContent = "0";
-  firstInput = [];
-  secondInput = [];
-  firstNumber = "";
-  secondNumber = "";
-  operator = "";
-  answer = "";
+// capture number inputs
+const captureNumber = function (button) {
+  if (!operator) {
+    firstInput.push(button.value);
+    if (firstInput.includes(".")) {
+      disableDecimal();
+    }
+    firstNumber = firstInput.join("");
+    result.textContent = firstNumber;
+    enableOperator();
+  } else if (operator && !answer) {
+    secondInput.push(button.value);
+    if (secondInput.includes(".")) {
+      disableDecimal();
+    }
+    secondNumber = secondInput.join("");
+    result.textContent = secondNumber;
+    enableOperator();
+  } else {
+    result.textContent = "Number button error.";
+  }
+};
+
+// caputure operator selection
+const captureOperator = function (button) {
+  if (firstInput.length === 0 && firstNumber === null) {
+    // use "=== null" instead of !firstNumber bc 1st # could be zero
+    return clear();
+  } else if (operator) {
+    displayAnswer();
+    operator = button.value;
+    disableOperator();
+  } else {
+    operator = button.value;
+    disableOperator();
+  }
   enableDecimal();
 };
-const clearButton = document.querySelector(".clear");
-clearButton.addEventListener("click", clear, false);
 
-// listen for "number" button clicks
-const numberButtons = document.querySelectorAll(".number");
-numberButtons.forEach((button) => {
-  // and for each one we add a 'click' listener
-  button.addEventListener("click", () => {
-    if (!operator) {
-      firstInput.push(button.value);
-      if (firstInput.includes(".")) {
-        disableDecimal();
-      }
-      firstNumber = firstInput.join("");
-      result.textContent = firstNumber;
-      enableOperator();
-    } else if (operator && !answer) {
-      secondInput.push(button.value);
-      if (secondInput.includes(".")) {
-        disableDecimal();
-      }
-      secondNumber = secondInput.join("");
-      result.textContent = secondNumber;
-      enableOperator();
-    } else {
-      result.textContent = "Number button error.";
-    }
-  });
-});
-
-// listen for "operator" button clicks
-const operatorButtons = document.querySelectorAll(".operator");
-operatorButtons.forEach((button) => {
-  // and for each one we add a 'click' listener
-  button.addEventListener("click", () => {
-    // check if pressing operator before first inputs collected
-    if (firstInput.length === 0 && firstNumber === null) {
-      // use "=== null" instead of !firstNumber bc 1st # could be zero
-      return clear();
-    } else if (operator) {
-      displayAnswer();
-      operator = button.value;
-      disableOperator();
-    } else {
-      operator = button.value;
-      disableOperator();
-    }
-    enableDecimal();
-  });
-});
-
-// listen for "equals" button click
-const equalsButton = document.querySelector(".equals");
-equalsButton.addEventListener("click", () => {
+// equals button. display answer.
+const equals = function () {
   // check if pressing equal before all inputs collected
   if (secondInput.length === 0) {
     clear();
   } else {
     displayAnswer();
   }
+};
+
+// LISTEN FOR EVENTS //
+// listen for "number" button clicks
+numberButtons.forEach((button) => {
+  // and for each one we add a 'click' listener
+  button.addEventListener("click", () => {
+    captureNumber(button);
+  });
 });
+// listen for "operator" button clicks
+operatorButtons.forEach((button) => {
+  // and for each one we add a 'click' listener
+  button.addEventListener("click", () => {
+    captureOperator(button);
+  });
+});
+// listen for "clear" button click
+clearButton.addEventListener("click", clear, false);
+// listen for "bksp" button click
+backspaceButton.addEventListener("click", backspace, false);
+// listen for "equals" button click
+equalsButton.addEventListener("click", equals, false);
 
 /** BUGS OR TO-DO
  * -
