@@ -34,6 +34,7 @@ const divide = function (a, b) {
   } else {
     warning.classList.add("warning");
     warning.textContent = "Can't divide by zero!!!";
+    clear();
     result.textContent = "";
     result.appendChild(warning);
   }
