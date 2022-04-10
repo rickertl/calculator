@@ -159,6 +159,9 @@ const captureOperator = function (button) {
 
 // equals button. display answer.
 const equals = function () {
+  if (!firstNumber) {
+    firstNumber = 0;
+  }
   secondInput.length === 0 ? clear() : displayAnswer();
 };
 
