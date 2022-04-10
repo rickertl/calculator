@@ -31,15 +31,7 @@ const multiply = function (a, b) {
 };
 
 const divide = function (a, b) {
-  if (b !== 0) {
-    return a / b;
-  } else {
-    warning.classList.add("warning");
-    warning.textContent = "Can't divide by zero!";
-    clear();
-    result.textContent = "";
-    result.appendChild(warning);
-  }
+  return a / b;
 };
 
 // main operate function
@@ -72,16 +64,21 @@ const toggleDecimal = function (action) {
 
 // display answer and ready for more inputs
 const displayAnswer = function () {
-  operate(String(operator), firstNumber, secondNumber);
-  if (typeof answer === "number") {
-    // need this for zero error, otherwise NaN
+  if (secondNumber !== 0) {
+    operate(String(operator), firstNumber, secondNumber);
     result.textContent = Math.round(answer * 100) / 100;
     firstNumber = answer;
+    firstInput = [];
+    secondInput = [];
+    operator = "";
+    answer = "";
+  } else {
+    warning.classList.add("warning");
+    warning.textContent = "Can't divide by zero!";
+    clear();
+    result.textContent = "";
+    result.appendChild(warning);
   }
-  firstInput = [];
-  secondInput = [];
-  operator = "";
-  answer = "";
 };
 
 // clear calculator
