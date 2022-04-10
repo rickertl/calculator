@@ -82,6 +82,11 @@
   background-color: orange;
   font-size: 2rem;
 }
+.warning {
+  color: red;
+  font-size: 1.8rem;
+}
+
 @media screen and (min-width: 769px) {
   .container {
     max-width: 280px;

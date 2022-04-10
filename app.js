@@ -6,6 +6,7 @@ let secondNumber = "";
 let operator = "";
 let answer = "";
 let result = document.querySelector(".result");
+const warning = document.createElement("span");
 const clearButton = document.querySelector(".clear");
 const backspaceButton = document.querySelector(".backspace");
 const numberButtons = document.querySelectorAll(".number");
@@ -27,7 +28,14 @@ const multiply = function (a, b) {
 };
 
 const divide = function (a, b) {
-  return b !== 0 ? a / b : (result.textContent = `Can't divide by 0!!!`);
+  if (b !== 0) {
+    return a / b;
+  } else {
+    warning.classList.add("warning");
+    warning.textContent = "Can't divide by zero!!!";
+    result.textContent = "";
+    result.appendChild(warning);
+  }
 };
 
 // main operate function
@@ -71,10 +79,10 @@ const enableDecimal = function () {
 // display answer and ready for more inputs
 const displayAnswer = function () {
   operate(String(operator), firstNumber, secondNumber);
-  typeof answer === "string"
-    ? (result.textContent = answer)
-    : (result.textContent = Math.round(answer * 100) / 100);
-  firstNumber = answer;
+  if (typeof answer === "number") {
+    result.textContent = Math.round(answer * 100) / 100;
+    firstNumber = answer;
+  }
   firstInput = [];
   secondInput = [];
   operator = "";
@@ -175,5 +183,5 @@ backspaceButton.addEventListener("click", backspace, false);
 equalsButton.addEventListener("click", equals, false);
 
 /** BUGS OR TO-DO
- * - make division zero error message smaller
+ * -
  * */
