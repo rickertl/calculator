@@ -13,9 +13,6 @@ const numberButtons = document.querySelectorAll(".number");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalsButton = document.querySelector(".equals");
 
-// default display
-result.textContent = firstNumber;
-
 // FUNCTIONS //
 // basic math operators
 const add = function (a, b) {
@@ -72,6 +69,7 @@ const clear = function () {
   answer = "";
   toggleDecimal("enable");
   toggleOperator("enable");
+  document.querySelector(".equals").disabled = true;
   result.textContent = firstNumber;
 };
 
@@ -126,6 +124,7 @@ const captureOperator = function (button) {
   operator = button.value;
   toggleOperator("disable"); // prevent consecutive operator button clicks
   toggleDecimal("enable"); // enable here bc now ready for 2nd number input
+  document.querySelector(".equals").disabled = false;
 };
 
 // display answer and ready for more inputs
@@ -148,6 +147,8 @@ const displayAnswer = function () {
 };
 
 // LISTEN FOR EVENTS //
+// on document load, fire clear function for defaults
+window.addEventListener("load", clear, false);
 // listen for "number" button clicks
 numberButtons.forEach((button) => {
   // and for each one we add a 'click' listener
