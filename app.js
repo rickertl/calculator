@@ -137,23 +137,17 @@ const captureNumber = function (button) {
     result.textContent = secondNumber;
     enableOperator();
   } else {
-    result.textContent = "Number button error.";
+    result.textContent = "Number capture error.";
   }
 };
 
 // caputure operator selection
 const captureOperator = function (button) {
-  if (firstInput.length === 0 && firstNumber === null) {
-    // use "=== null" instead of !firstNumber bc 1st # could be zero
-    return clear();
-  } else if (operator) {
+  if (operator) {
     displayAnswer();
-    operator = button.value;
-    disableOperator();
-  } else {
-    operator = button.value;
-    disableOperator();
   }
+  operator = button.value;
+  disableOperator();
   enableDecimal();
 };
 
