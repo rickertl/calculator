@@ -125,6 +125,10 @@ const captureNumber = function (button) {
     result.textContent = firstNumber;
   } else {
     secondInput.push(button.value);
+    // allows for starting with decimal
+    if (secondInput[0] === ".") {
+      secondInput.unshift("0");
+    }
     // prevent multiple decimal button inputs
     if (secondInput.includes(".")) {
       toggleDecimal("disable");
