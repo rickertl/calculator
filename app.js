@@ -1,18 +1,20 @@
 // VARIABLE DECLARATIONS //
 let firstInput = [];
 let secondInput = [];
-let firstNumber = "";
-let secondNumber = "";
+let firstNumber = 0;
+let secondNumber = 0;
 let operator = "";
 let answer = "";
 let result = document.querySelector(".result");
-result.textContent = 0; // default display
 const warning = document.createElement("span");
 const clearButton = document.querySelector(".clear");
 const backspaceButton = document.querySelector(".backspace");
 const numberButtons = document.querySelectorAll(".number");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalsButton = document.querySelector(".equals");
+
+// default display
+result.textContent = firstNumber;
 
 // FUNCTIONS //
 // basic math operators
@@ -95,14 +97,14 @@ const displayAnswer = function () {
 
 // clear calculator
 const clear = function () {
-  result.textContent = "0";
   firstInput = [];
   secondInput = [];
-  firstNumber = "";
-  secondNumber = "";
+  firstNumber = 0;
+  secondNumber = 0;
   operator = "";
   answer = "";
   enableDecimal();
+  result.textContent = firstNumber;
 };
 
 // backspace button
@@ -151,17 +153,6 @@ const captureOperator = function (button) {
   enableDecimal();
 };
 
-// equals button. display answer.
-const equals = function () {
-  if (!firstNumber) {
-    firstNumber = 0;
-  }
-  if (secondInput.length === 0) {
-    secondNumber = 0;
-  }
-  displayAnswer();
-};
-
 // LISTEN FOR EVENTS //
 // listen for "number" button clicks
 numberButtons.forEach((button) => {
@@ -182,8 +173,9 @@ clearButton.addEventListener("click", clear, false);
 // listen for "bksp" button click
 backspaceButton.addEventListener("click", backspace, false);
 // listen for "equals" button click
-equalsButton.addEventListener("click", equals, false);
+equalsButton.addEventListener("click", displayAnswer, false);
 
 /** BUGS OR TO-DO
+ * -
  * -
  * */
