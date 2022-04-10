@@ -15,21 +15,19 @@ const equalsButton = document.querySelector(".equals");
 // FUNCTIONS //
 // basic math operators
 const add = function (a, b) {
-  return Number(a) + Number(b);
+  return a + b;
 };
 
 const subtract = function (a, b) {
-  return Number(a) - Number(b);
+  return a - b;
 };
 
 const multiply = function (a, b) {
-  return Number(a) * Number(b);
+  return a * b;
 };
 
 const divide = function (a, b) {
-  return Number(b) !== 0
-    ? Number(a) / Number(b)
-    : (result.textContent = `Can't divide by 0!!!`);
+  return b !== 0 ? a / b : (result.textContent = `Can't divide by 0!!!`);
 };
 
 // main operate function
@@ -101,11 +99,11 @@ const clear = function () {
 const backspace = function () {
   if (secondInput.length === 0) {
     firstInput.pop();
-    firstNumber = firstInput.join("");
+    firstNumber = Number(firstInput.join(""));
     result.textContent = firstNumber;
   } else {
     secondInput.pop();
-    secondNumber = secondInput.join("");
+    secondNumber = Number(secondInput.join(""));
     result.textContent = secondNumber;
   }
 };
@@ -117,7 +115,7 @@ const captureNumber = function (button) {
     if (firstInput.includes(".")) {
       disableDecimal();
     }
-    firstNumber = firstInput.join("");
+    firstNumber = Number(firstInput.join(""));
     result.textContent = firstNumber;
     enableOperator();
   } else if (operator && !answer) {
@@ -125,7 +123,7 @@ const captureNumber = function (button) {
     if (secondInput.includes(".")) {
       disableDecimal();
     }
-    secondNumber = secondInput.join("");
+    secondNumber = Number(secondInput.join(""));
     result.textContent = secondNumber;
     enableOperator();
   } else {
@@ -177,5 +175,5 @@ backspaceButton.addEventListener("click", backspace, false);
 equalsButton.addEventListener("click", equals, false);
 
 /** BUGS OR TO-DO
- * -
+ * - make division zero error message smaller
  * */
