@@ -62,25 +62,6 @@ const toggleDecimal = function (action) {
     : (document.querySelector(".decimal").disabled = false);
 };
 
-// display answer and ready for more inputs
-const displayAnswer = function () {
-  if (secondNumber !== 0) {
-    operate(String(operator), firstNumber, secondNumber);
-    result.textContent = Math.round(answer * 100) / 100;
-    firstNumber = answer;
-    firstInput = [];
-    secondInput = [];
-    operator = "";
-    answer = "";
-  } else {
-    warning.classList.add("warning");
-    warning.textContent = "Can't divide by zero!";
-    clear();
-    result.textContent = "";
-    result.appendChild(warning);
-  }
-};
-
 // clear calculator
 const clear = function () {
   firstInput = [];
@@ -145,6 +126,25 @@ const captureOperator = function (button) {
   operator = button.value;
   toggleOperator("disable"); // prevent consecutive operator button clicks
   toggleDecimal("enable"); // enable here bc now ready for 2nd number input
+};
+
+// display answer and ready for more inputs
+const displayAnswer = function () {
+  if (secondNumber !== 0) {
+    operate(String(operator), firstNumber, secondNumber);
+    result.textContent = Math.round(answer * 100) / 100;
+    firstNumber = answer;
+    firstInput = [];
+    secondInput = [];
+    operator = "";
+    answer = "";
+  } else {
+    warning.classList.add("warning");
+    warning.textContent = "Can't divide by zero!";
+    clear();
+    result.textContent = "";
+    result.appendChild(warning);
+  }
 };
 
 // LISTEN FOR EVENTS //
