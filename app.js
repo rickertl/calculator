@@ -6,6 +6,7 @@ let secondNumber = "";
 let operator = "";
 let answer = "";
 let result = document.querySelector(".result");
+result.textContent = 0; // default display
 const warning = document.createElement("span");
 const clearButton = document.querySelector(".clear");
 const backspaceButton = document.querySelector(".backspace");
