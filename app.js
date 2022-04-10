@@ -91,8 +91,6 @@ const displayAnswer = function () {
   secondInput = [];
   operator = "";
   answer = "";
-  enableOperator();
-  enableDecimal();
 };
 
 // clear calculator
@@ -104,6 +102,7 @@ const clear = function () {
   operator = "";
   answer = "";
   enableDecimal();
+  enableOperator();
   result.textContent = firstNumber;
 };
 
@@ -124,13 +123,16 @@ const backspace = function () {
 const captureNumber = function (button) {
   if (!operator) {
     firstInput.push(button.value);
+    // allows for starting with decimal
+    if (firstInput[0] === ".") {
+      firstInput.unshift("0");
+    }
     // prevent multiple decimal button inputs
     if (firstInput.includes(".")) {
       disableDecimal();
     }
     firstNumber = Number(firstInput.join(""));
     result.textContent = firstNumber;
-    enableOperator();
   } else {
     secondInput.push(button.value);
     // prevent multiple decimal button inputs
@@ -139,7 +141,7 @@ const captureNumber = function (button) {
     }
     secondNumber = Number(secondInput.join(""));
     result.textContent = secondNumber;
-    enableOperator();
+    enableOperator(); //enable here bc once 2nd number, can use operator again
   }
 };
 
@@ -150,7 +152,7 @@ const captureOperator = function (button) {
   }
   operator = button.value;
   disableOperator(); // prevent consecutive operator button clicks
-  enableDecimal();
+  enableDecimal(); // enable here bc now ready for 2nd number input
 };
 
 // LISTEN FOR EVENTS //
