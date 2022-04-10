@@ -131,7 +131,7 @@ const captureNumber = function (button) {
     firstNumber = Number(firstInput.join(""));
     result.textContent = firstNumber;
     enableOperator();
-  } else if (operator && !answer) {
+  } else {
     secondInput.push(button.value);
     // prevent multiple decimal button inputs
     if (secondInput.includes(".")) {
@@ -140,8 +140,6 @@ const captureNumber = function (button) {
     secondNumber = Number(secondInput.join(""));
     result.textContent = secondNumber;
     enableOperator();
-  } else {
-    result.textContent = "Number capture error.";
   }
 };
 
