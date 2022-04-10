@@ -56,28 +56,18 @@ const operate = function (operator, a, b) {
   }
 };
 
-// disable operator button
-const disableOperator = function () {
+// disable/enable operator button
+const toggleOperator = function (action) {
   document.querySelectorAll(".operator").forEach((button) => {
-    button.disabled = true;
+    action === "disable" ? (button.disabled = true) : (button.disabled = false);
   });
 };
 
-// enable operator button
-const enableOperator = function () {
-  document.querySelectorAll(".operator").forEach((button) => {
-    button.disabled = false;
-  });
-};
-
-// disable decimal button
-const disableDecimal = function () {
-  document.querySelector(".decimal").disabled = true;
-};
-
-// enable decimal button
-const enableDecimal = function () {
-  document.querySelector(".decimal").disabled = false;
+// disable/enable decimal button
+const toggleDecimal = function (action) {
+  action === "disable"
+    ? (document.querySelector(".decimal").disabled = true)
+    : (document.querySelector(".decimal").disabled = false);
 };
 
 // display answer and ready for more inputs
@@ -101,8 +91,8 @@ const clear = function () {
   secondNumber = 0;
   operator = "";
   answer = "";
-  enableDecimal();
-  enableOperator();
+  toggleDecimal("enable");
+  toggleOperator("enable");
   result.textContent = firstNumber;
 };
 
@@ -129,7 +119,7 @@ const captureNumber = function (button) {
     }
     // prevent multiple decimal button inputs
     if (firstInput.includes(".")) {
-      disableDecimal();
+      toggleDecimal("disable");
     }
     firstNumber = Number(firstInput.join(""));
     result.textContent = firstNumber;
@@ -137,11 +127,11 @@ const captureNumber = function (button) {
     secondInput.push(button.value);
     // prevent multiple decimal button inputs
     if (secondInput.includes(".")) {
-      disableDecimal();
+      toggleDecimal("disable");
     }
     secondNumber = Number(secondInput.join(""));
     result.textContent = secondNumber;
-    enableOperator(); //enable here bc once 2nd number, can use operator again
+    toggleOperator("enable"); //enable here bc once 2nd number, can use operator again
   }
 };
 
@@ -151,8 +141,8 @@ const captureOperator = function (button) {
     displayAnswer();
   }
   operator = button.value;
-  disableOperator(); // prevent consecutive operator button clicks
-  enableDecimal(); // enable here bc now ready for 2nd number input
+  toggleOperator("disable"); // prevent consecutive operator button clicks
+  toggleDecimal("enable"); // enable here bc now ready for 2nd number input
 };
 
 // LISTEN FOR EVENTS //
