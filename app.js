@@ -74,6 +74,7 @@ const toggleDecimal = function (action) {
 const displayAnswer = function () {
   operate(String(operator), firstNumber, secondNumber);
   if (typeof answer === "number") {
+    // need this for zero error, otherwise NaN
     result.textContent = Math.round(answer * 100) / 100;
     firstNumber = answer;
   }
