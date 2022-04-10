@@ -156,7 +156,10 @@ const equals = function () {
   if (!firstNumber) {
     firstNumber = 0;
   }
-  secondInput.length === 0 ? clear() : displayAnswer();
+  if (secondInput.length === 0) {
+    secondNumber = 0;
+  }
+  displayAnswer();
 };
 
 // LISTEN FOR EVENTS //
