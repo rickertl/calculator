@@ -103,4 +103,5 @@
 button {
   -webkit-appearance: none;
   border-radius: 0;
+  touch-action: manipulation; /* disable double tap zoom */
 }
