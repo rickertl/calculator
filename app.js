@@ -56,7 +56,7 @@ const operate = function (operator, a, b) {
   }
 };
 
-// disable operator button. prevent consecutive operator button clicks.
+// disable operator button
 const disableOperator = function () {
   document.querySelectorAll(".operator").forEach((button) => {
     button.disabled = true;
@@ -70,7 +70,7 @@ const enableOperator = function () {
   });
 };
 
-// disable decimal button. prevent consecutive decimal button clicks.
+// disable decimal button
 const disableDecimal = function () {
   document.querySelector(".decimal").disabled = true;
 };
@@ -124,6 +124,7 @@ const backspace = function () {
 const captureNumber = function (button) {
   if (!operator) {
     firstInput.push(button.value);
+    // prevent multiple decimal button inputs
     if (firstInput.includes(".")) {
       disableDecimal();
     }
@@ -132,6 +133,7 @@ const captureNumber = function (button) {
     enableOperator();
   } else if (operator && !answer) {
     secondInput.push(button.value);
+    // prevent multiple decimal button inputs
     if (secondInput.includes(".")) {
       disableDecimal();
     }
@@ -149,7 +151,7 @@ const captureOperator = function (button) {
     displayAnswer();
   }
   operator = button.value;
-  disableOperator();
+  disableOperator(); // prevent consecutive operator button clicks
   enableDecimal();
 };
 
