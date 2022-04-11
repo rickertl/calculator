@@ -23,17 +23,18 @@
 .display {
   height: 15vh;
   background-color: #4d4d4d;
-  color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  padding-right: 20px;
+}
+.result {
+  width: 100%;
+  text-align: right;
+  padding: 0 20px;
+  color: white;
   font-size: 2.25rem;
 }
 .btn,
@@ -83,6 +84,9 @@
   font-size: 2rem;
 }
 .warning {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
   color: red;
   font-size: 1.5rem;
 }
