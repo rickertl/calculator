@@ -112,19 +112,21 @@ const captureNumber = function (button) {
     }
     secondNumber = Number(secondInput.join(""));
     result.textContent = secondNumber;
-    toggleButtonState(operatorButtons, "enable"); //enable here bc once 2nd number, can use operator again
   }
+  toggleButtonState(operatorButtons, "enable"); // once input another number, can use operators again
 };
 
 // caputure operator selection
 const captureOperator = function (button) {
   if (operator) {
     displayAnswer();
+    console.log(operator);
   }
   operator = button.value;
   toggleButtonState(decimalButton, "enable"); // enable here bc now ready for 2nd number input
   toggleButtonState(equalsButton, "enable");
   toggleButtonState(operatorButtons, "disable"); // prevent consecutive operator button clicks
+  console.log(operator);
 };
 
 // display answer and ready for more inputs
@@ -172,6 +174,6 @@ backspaceButton.addEventListener("click", backspace, false);
 equalsButton.addEventListener("click", displayAnswer, false);
 
 /** BUGS OR TO-DO
- * -
- * -
+ * •
+ * •
  * */
