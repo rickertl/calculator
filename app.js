@@ -5,6 +5,7 @@ let firstNumber = 0;
 let secondNumber = 0;
 let operator = "";
 let answer = "";
+let roundedAnswer = "";
 let result = document.querySelector(".result");
 const warning = document.createElement("span");
 const clearButton = document.querySelector(".clear");
@@ -67,6 +68,7 @@ const clear = function () {
   secondNumber = 0;
   operator = "";
   answer = "";
+  roundedAnswer = "";
   toggleButtonState(decimalButton, "enable");
   toggleButtonState(equalsButton, "disable");
   toggleButtonState(operatorButtons, "enable");
@@ -137,12 +139,14 @@ const displayAnswer = function () {
     result.appendChild(warning);
   } else {
     operate(String(operator), firstNumber, secondNumber);
-    result.textContent = Math.round(answer * 100) / 100;
+    roundedAnswer = Math.round(answer * 100) / 100;
+    result.textContent = roundedAnswer.toLocaleString("en-US");
     firstNumber = answer;
     firstInput = [];
     secondInput = [];
     operator = "";
     answer = "";
+    roundedAnswer = "";
   }
   toggleButtonState(equalsButton, "disable"); // prevent consecutive equals button clicks
 };
