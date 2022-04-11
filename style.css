@@ -50,7 +50,6 @@
 }
 .btn {
   cursor: pointer;
-  touch-action: manipulation; /* disable double tap zoom */
 }
 .row1 .btn,
 .row1 .blank {

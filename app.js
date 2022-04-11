@@ -8,6 +8,7 @@ let answer = "";
 let roundedAnswer = "";
 let result = document.querySelector(".result");
 const warning = document.createElement("span");
+const buttons = document.querySelectorAll(".btn");
 const clearButton = document.querySelector(".clear");
 const backspaceButton = document.querySelector(".backspace");
 const numberButtons = document.querySelectorAll(".number");
@@ -174,6 +175,14 @@ clearButton.addEventListener("click", clear, false);
 backspaceButton.addEventListener("click", backspace, false);
 // listen for "equals" button click
 equalsButton.addEventListener("click", displayAnswer, false);
+
+// prevent double tap zoom on mobile
+buttons.forEach((button) => {
+  // and for each one we add a 'click' listener
+  button.addEventListener("dblclick", function (e) {
+    e.preventDefault();
+  });
+});
 
 /** BUGS OR TO-DO
  * •
