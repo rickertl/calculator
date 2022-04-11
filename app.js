@@ -12,6 +12,7 @@ const backspaceButton = document.querySelector(".backspace");
 const numberButtons = document.querySelectorAll(".number");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalsButton = document.querySelector(".equals");
+const decimalButton = document.querySelector(".decimal");
 
 // FUNCTIONS //
 // basic math operators
@@ -45,18 +46,17 @@ const operate = function (operator, a, b) {
   }
 };
 
-// disable/enable button state
-const toggleButtonState = function (key, action) {
-  action === "disable"
-    ? (document.querySelector(key).disabled = true)
-    : (document.querySelector(key).disabled = false);
-};
-
-// disable/enable operator button
-const toggleOperatorState = function (action) {
-  document.querySelectorAll(".operator").forEach((button) => {
+// disable/enable button state(s)
+const toggleButtonState = function (button, action) {
+  if (button === operatorButtons) {
+    operatorButtons.forEach((button) => {
+      action === "disable"
+        ? (button.disabled = true)
+        : (button.disabled = false);
+    });
+  } else {
     action === "disable" ? (button.disabled = true) : (button.disabled = false);
-  });
+  }
 };
 
 // clear calculator
@@ -67,9 +67,9 @@ const clear = function () {
   secondNumber = 0;
   operator = "";
   answer = "";
-  toggleButtonState(".decimal", "enable");
-  toggleButtonState(".equals", "disable");
-  toggleOperatorState("enable");
+  toggleButtonState(decimalButton, "enable");
+  toggleButtonState(equalsButton, "disable");
+  toggleButtonState(operatorButtons, "enable");
   result.textContent = firstNumber;
 };
 
@@ -96,7 +96,7 @@ const captureNumber = function (button) {
     }
     // prevent multiple decimal button inputs
     if (firstInput.includes(".")) {
-      toggleButtonState(".decimal", "disable");
+      toggleButtonState(decimalButton, "disable");
     }
     firstNumber = Number(firstInput.join(""));
     result.textContent = firstNumber;
@@ -108,11 +108,11 @@ const captureNumber = function (button) {
     }
     // prevent multiple decimal button inputs
     if (secondInput.includes(".")) {
-      toggleButtonState(".decimal", "disable");
+      toggleButtonState(decimalButton, "disable");
     }
     secondNumber = Number(secondInput.join(""));
     result.textContent = secondNumber;
-    toggleOperatorState("enable"); //enable here bc once 2nd number, can use operator again
+    toggleButtonState(operatorButtons, "enable"); //enable here bc once 2nd number, can use operator again
   }
 };
 
@@ -122,14 +122,20 @@ const captureOperator = function (button) {
     displayAnswer();
   }
   operator = button.value;
-  toggleButtonState(".decimal", "enable"); // enable here bc now ready for 2nd number input
-  toggleButtonState(".equals", "enable");
-  toggleOperatorState("disable"); // prevent consecutive operator button clicks
+  toggleButtonState(decimalButton, "enable"); // enable here bc now ready for 2nd number input
+  toggleButtonState(equalsButton, "enable");
+  toggleButtonState(operatorButtons, "disable"); // prevent consecutive operator button clicks
 };
 
 // display answer and ready for more inputs
 const displayAnswer = function () {
-  if (secondNumber !== 0) {
+  if (secondNumber === 0 && operator === "divide") {
+    warning.classList.add("warning");
+    warning.textContent = "Can't divide by zero!";
+    clear();
+    result.textContent = "";
+    result.appendChild(warning);
+  } else {
     operate(String(operator), firstNumber, secondNumber);
     result.textContent = Math.round(answer * 100) / 100;
     firstNumber = answer;
@@ -137,13 +143,8 @@ const displayAnswer = function () {
     secondInput = [];
     operator = "";
     answer = "";
-  } else {
-    warning.classList.add("warning");
-    warning.textContent = "Can't divide by zero!";
-    clear();
-    result.textContent = "";
-    result.appendChild(warning);
   }
+  toggleButtonState(equalsButton, "disable"); // prevent consecutive equals button clicks
 };
 
 // LISTEN FOR EVENTS //
