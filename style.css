@@ -50,6 +50,7 @@
 }
 .btn {
   cursor: pointer;
+  touch-action: manipulation; /* disable double tap zoom */
 }
 .row1 .btn,
 .row1 .blank {
@@ -107,5 +108,4 @@
 button {
   -webkit-appearance: none;
   border-radius: 0;
-  touch-action: manipulation; /* disable double tap zoom */
 }
