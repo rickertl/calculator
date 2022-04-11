@@ -10,9 +10,9 @@ const warning = document.createElement("span");
 const clearButton = document.querySelector(".clear");
 const backspaceButton = document.querySelector(".backspace");
 const numberButtons = document.querySelectorAll(".number");
+const decimalButton = document.querySelector(".decimal");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalsButton = document.querySelector(".equals");
-const decimalButton = document.querySelector(".decimal");
 
 // FUNCTIONS //
 // basic math operators
@@ -120,13 +120,11 @@ const captureNumber = function (button) {
 const captureOperator = function (button) {
   if (operator) {
     displayAnswer();
-    console.log(operator);
   }
   operator = button.value;
   toggleButtonState(decimalButton, "enable"); // enable here bc now ready for 2nd number input
   toggleButtonState(equalsButton, "enable");
   toggleButtonState(operatorButtons, "disable"); // prevent consecutive operator button clicks
-  console.log(operator);
 };
 
 // display answer and ready for more inputs
