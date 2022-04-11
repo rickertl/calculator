@@ -51,6 +51,9 @@
 .btn {
   cursor: pointer;
 }
+.btn:disabled {
+  cursor: default;
+}
 .row1 .btn,
 .row1 .blank {
   background-color: #5a5a5a;
