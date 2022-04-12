@@ -80,11 +80,11 @@ const clear = function () {
 const backspace = function () {
   if (secondInput.length === 0) {
     firstInput.pop();
-    firstNumber = Number(firstInput.join(""));
+    firstNumber = firstInput.join("");
     result.textContent = firstNumber;
   } else {
     secondInput.pop();
-    secondNumber = Number(secondInput.join(""));
+    secondNumber = secondInput.join("");
     result.textContent = secondNumber;
   }
 };
@@ -101,7 +101,7 @@ const captureNumber = function (button) {
     if (firstInput.includes(".")) {
       toggleButtonState(decimalButton, "disable");
     }
-    firstNumber = Number(firstInput.join(""));
+    firstNumber = firstInput.join("");
     result.textContent = firstNumber;
   } else {
     secondInput.push(button.value);
@@ -113,7 +113,7 @@ const captureNumber = function (button) {
     if (secondInput.includes(".")) {
       toggleButtonState(decimalButton, "disable");
     }
-    secondNumber = Number(secondInput.join(""));
+    secondNumber = secondInput.join("");
     result.textContent = secondNumber;
   }
   toggleButtonState(operatorButtons, "enable"); // once input another number, can use operators again
@@ -132,14 +132,14 @@ const captureOperator = function (button) {
 
 // display answer and ready for more inputs
 const displayAnswer = function () {
-  if (secondNumber === 0 && operator === "divide") {
+  if (Number(secondNumber) === 0 && operator === "divide") {
     warning.classList.add("warning");
     warning.textContent = "Can't divide by zero!";
     clear();
     result.textContent = "";
     result.appendChild(warning);
   } else {
-    operate(String(operator), firstNumber, secondNumber);
+    operate(String(operator), Number(firstNumber), Number(secondNumber));
     roundedAnswer = Math.round(answer * 100) / 100;
     result.textContent = roundedAnswer.toLocaleString("en-US");
     firstNumber = answer;
