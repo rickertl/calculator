@@ -115,6 +115,7 @@ const captureNumber = function (button) {
     }
     secondNumber = secondInput.join("");
     result.textContent = secondNumber;
+    toggleButtonState(equalsButton, "enable"); // enable bc now have 2nd number
   }
   toggleButtonState(operatorButtons, "enable"); // once input another number, can use operators again
 };
@@ -126,7 +127,7 @@ const captureOperator = function (button) {
   }
   operator = button.value;
   toggleButtonState(decimalButton, "enable"); // enable here bc now ready for 2nd number input
-  toggleButtonState(equalsButton, "enable");
+  toggleButtonState(equalsButton, "disable"); // disable here bc rather require 2nd number input
   toggleButtonState(operatorButtons, "disable"); // prevent consecutive operator button clicks
 };
 
@@ -186,5 +187,7 @@ buttons.forEach((button) => {
 
 /** BUGS OR TO-DO
  * •
+ * • show highlight on selected operator
+ * • show action on button when clicked
  * •
  * */
