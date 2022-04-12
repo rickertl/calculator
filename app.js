@@ -80,11 +80,15 @@ const clear = function () {
 const backspace = function () {
   if (secondInput.length === 0) {
     firstInput.pop();
-    firstNumber = firstInput.join("");
+    firstInput.length === 0
+      ? (firstNumber = "0")
+      : (firstNumber = firstInput.join(""));
     result.textContent = firstNumber;
   } else {
     secondInput.pop();
-    secondNumber = secondInput.join("");
+    secondInput.length === 0
+      ? (secondNumber = "0")
+      : (secondNumber = secondInput.join(""));
     result.textContent = secondNumber;
   }
 };
