@@ -141,7 +141,7 @@ const displayAnswer = function () {
     result.appendChild(warning);
   } else {
     operate(String(operator), Number(firstNumber), Number(secondNumber));
-    roundedAnswer = Math.round(answer * 100) / 100;
+    roundedAnswer = Math.round(answer * 1000) / 1000;
     result.textContent = roundedAnswer.toLocaleString("en-US");
     firstNumber = answer;
     firstInput = [];
