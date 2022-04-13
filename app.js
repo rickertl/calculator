@@ -89,13 +89,13 @@ const backspace = function () {
     firstInput.length === 0
       ? (firstNumber = "0")
       : (firstNumber = firstInput.join(""));
-    result.textContent = firstNumber;
+    result.textContent = Number(firstNumber).toLocaleString("en-US");
   } else {
     secondInput.pop();
     secondInput.length === 0
       ? (secondNumber = "0")
       : (secondNumber = secondInput.join(""));
-    result.textContent = secondNumber;
+    result.textContent = Number(secondNumber).toLocaleString("en-US");
   }
 };
 
