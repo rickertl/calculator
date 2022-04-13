@@ -113,7 +113,7 @@ const captureNumber = function (button) {
       toggleButtonState(decimalButton, "disable");
     }
     firstNumber = firstInput.join("");
-    result.textContent = firstNumber;
+    result.textContent = Number(firstNumber).toLocaleString("en-US");
   } else {
     secondInput.push(button.value);
     // allows for starting with decimal
@@ -125,7 +125,7 @@ const captureNumber = function (button) {
       toggleButtonState(decimalButton, "disable");
     }
     secondNumber = secondInput.join("");
-    result.textContent = secondNumber;
+    result.textContent = Number(secondNumber).toLocaleString("en-US");
     toggleButtonState(equalsButton, "enable"); // enable bc now have 2nd number
   }
   toggleButtonState(operatorButtons, "enable"); // once input another number, can use operators again
