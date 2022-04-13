@@ -112,7 +112,12 @@ const captureNumber = function (button) {
       toggleButtonState(decimalButton, "disable");
     }
     firstNumber = firstInput.join("");
-    result.textContent = Number(firstNumber).toLocaleString("en-US");
+    // shows decimal in display when button hit, ELSE shows commas when needed
+    if (firstInput[1] === ".") {
+      result.textContent = firstNumber.toLocaleString("en-US");
+    } else {
+      result.textContent = Number(firstNumber).toLocaleString("en-US");
+    }
   } else {
     secondInput.push(button.value);
     // allows for starting with decimal
@@ -124,7 +129,12 @@ const captureNumber = function (button) {
       toggleButtonState(decimalButton, "disable");
     }
     secondNumber = secondInput.join("");
-    result.textContent = Number(secondNumber).toLocaleString("en-US");
+    // shows decimal in display when button hit, ELSE shows commas when needed
+    if (secondInput[1] === ".") {
+      result.textContent = secondNumber.toLocaleString("en-US");
+    } else {
+      result.textContent = Number(secondNumber).toLocaleString("en-US");
+    }
     toggleButtonState(equalsButton, "enable"); // enable bc now have 2nd number
   }
   toggleButtonState(operatorButtons, "enable"); // once input another number, can use operators again
