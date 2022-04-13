@@ -61,6 +61,14 @@ const toggleButtonState = function (button, action) {
   }
 };
 
+// reset operator selection
+const unselectOperator = function () {
+  const selected = document.querySelector(".selected");
+  if (selected) {
+    selected.classList.remove("selected");
+  }
+};
+
 // clear calculator
 const clear = function () {
   firstInput = [];
@@ -68,8 +76,7 @@ const clear = function () {
   firstNumber = 0;
   secondNumber = 0;
   operator = "";
-  answer = "";
-  roundedAnswer = "";
+  unselectOperator();
   toggleButtonState(decimalButton, "enable");
   toggleButtonState(equalsButton, "disable");
   toggleButtonState(operatorButtons, "enable");
@@ -130,6 +137,8 @@ const captureOperator = function (button) {
     displayAnswer();
   }
   operator = button.value;
+  unselectOperator();
+  button.classList.add("selected");
   toggleButtonState(decimalButton, "enable"); // enable here bc now ready for 2nd number input
   toggleButtonState(equalsButton, "disable"); // disable here bc rather require 2nd number input
   toggleButtonState(operatorButtons, "disable"); // prevent consecutive operator button clicks
@@ -151,15 +160,41 @@ const displayAnswer = function () {
     firstInput = [];
     secondInput = [];
     operator = "";
-    answer = "";
-    roundedAnswer = "";
+    unselectOperator();
   }
   toggleButtonState(equalsButton, "disable"); // prevent consecutive equals button clicks
 };
 
+// button onclick ripple effect
+// https://css-tricks.com/how-to-recreate-the-ripple-effect-of-material-design-buttons/
+function createRipple(button) {
+  const circle = document.createElement("span");
+  const diameter = Math.max(button.clientWidth, button.clientHeight);
+  const radius = diameter / 2;
+  circle.style.width = circle.style.height = `${diameter}px`;
+  circle.style.left = `0`;
+  circle.style.top = `${button.clientHeight / 2 - radius}px`;
+  circle.classList.add("ripple");
+  const ripple = button.getElementsByClassName("ripple")[0];
+  if (ripple) {
+    ripple.remove();
+  }
+  button.appendChild(circle);
+}
+
 // LISTEN FOR EVENTS //
 // on document load, fire clear function for defaults
 window.addEventListener("load", clear, false);
+// ALL button actions. 1) prevent double tap zoom on mobile 2) onclick ripple effect
+buttons.forEach((button) => {
+  // and for each one we add a 'click' listener
+  button.addEventListener("dblclick", function (e) {
+    e.preventDefault();
+  });
+  button.addEventListener("click", () => {
+    createRipple(button);
+  });
+});
 // listen for "number" button clicks
 numberButtons.forEach((button) => {
   // and for each one we add a 'click' listener
@@ -181,17 +216,7 @@ backspaceButton.addEventListener("click", backspace, false);
 // listen for "equals" button click
 equalsButton.addEventListener("click", displayAnswer, false);
 
-// prevent double tap zoom on mobile
-buttons.forEach((button) => {
-  // and for each one we add a 'click' listener
-  button.addEventListener("dblclick", function (e) {
-    e.preventDefault();
-  });
-});
-
 /** BUGS OR TO-DO
  * •
- * • show highlight on selected operator
- * • show action on button when clicked
  * •
  * */

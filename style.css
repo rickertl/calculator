@@ -4,7 +4,9 @@
 * Autoprefixer: v10.3.1
 * Browsers: last 4 version
 */
-
+* {
+  box-sizing: border-box;
+}
 .container {
   text-align: center;
   margin: 20px auto;
@@ -48,6 +50,10 @@
   border-top: 1px solid #4d4d4d;
   border-left: 1px solid #4d4d4d;
 }
+.btn {
+  position: relative;
+  overflow: hidden;
+}
 .btn:enabled {
   cursor: pointer;
 }
@@ -83,12 +89,28 @@
   background-color: orange;
   font-size: 2rem;
 }
+.selected {
+  box-shadow: inset 1px 1px 2px black;
+}
 .warning {
   display: inline-block;
   width: 100%;
   text-align: center;
   color: red;
   font-size: 1.5rem;
+}
+span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 600ms linear;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
 }
 
 @media screen and (min-width: 769px) {
@@ -101,10 +123,4 @@
   .display {
     height: 80px;
   }
-}
-
-/* iOS button issue */
-button {
-  -webkit-appearance: none;
-  border-radius: 0;
 }
