@@ -7,7 +7,6 @@ let operator = "";
 let answer = "";
 let roundedAnswer = "";
 let result = document.querySelector(".result");
-const warning = document.createElement("span");
 const buttons = document.querySelectorAll(".btn");
 const clearButton = document.querySelector(".clear");
 const backspaceButton = document.querySelector(".backspace");
@@ -147,6 +146,7 @@ const captureOperator = function (button) {
 // display answer and ready for more inputs
 const displayAnswer = function () {
   if (Number(secondNumber) === 0 && operator === "divide") {
+    const warning = document.createElement("span");
     warning.classList.add("warning");
     warning.textContent = "Can't divide by zero!";
     clear();
@@ -169,7 +169,7 @@ const displayAnswer = function () {
 // https://css-tricks.com/how-to-recreate-the-ripple-effect-of-material-design-buttons/
 function createRipple(button) {
   const circle = document.createElement("span");
-  const diameter = Math.max(button.clientWidth, button.clientHeight);
+  const diameter = Math.max(button.clientWidth, button.clientHeight); // gives largest button dimension
   const radius = diameter / 2;
   circle.style.width = circle.style.height = `${diameter}px`;
   circle.style.left = `0`;
@@ -185,9 +185,9 @@ function createRipple(button) {
 // LISTEN FOR EVENTS //
 // on document load, fire clear function for defaults
 window.addEventListener("load", clear, false);
-// ALL button actions. 1) prevent double tap zoom on mobile 2) onclick ripple effect
+// listen for ALL button actions.
+// 1) prevent double-tap zoom on mobile 2) onclick ripple effect
 buttons.forEach((button) => {
-  // and for each one we add a 'click' listener
   button.addEventListener("dblclick", function (e) {
     e.preventDefault();
   });
@@ -197,14 +197,12 @@ buttons.forEach((button) => {
 });
 // listen for "number" button clicks
 numberButtons.forEach((button) => {
-  // and for each one we add a 'click' listener
   button.addEventListener("click", () => {
     captureNumber(button);
   });
 });
 // listen for "operator" button clicks
 operatorButtons.forEach((button) => {
-  // and for each one we add a 'click' listener
   button.addEventListener("click", () => {
     captureOperator(button);
   });
